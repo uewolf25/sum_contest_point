@@ -1,0 +1,1 @@
+# sum_contest_point
