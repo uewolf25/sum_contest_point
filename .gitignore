@@ -19,3 +19,7 @@ dist/
 # private information
 .clasp.json
 
+# not using files
+src/util.ts
+util.spec.ts
+
