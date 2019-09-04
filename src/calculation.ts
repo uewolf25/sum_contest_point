@@ -1,7 +1,7 @@
 import { FormService } from './form.service';
 
 export class Calculation {
-  static itemNumber = '9';
+  static itemNumber = '13';
   static pointMap: { [key: string]: number } = {};
   static voteMap: { [key: string]: number } = {};
 
@@ -55,6 +55,7 @@ export class Calculation {
 
   static pointCalc(point: number, num: string): void {
     this.pointMap[num] += point;
+    this.voteMap[num] += 1;
   }
 
   static replaceLetter(letter: string): string {
@@ -62,8 +63,31 @@ export class Calculation {
   }
 
   static print(): void {
-    for (let key in this.pointMap) {
-      Logger.log(key + '---' + this.pointMap[key]);
+    for (let key in (this.pointMap, this.voteMap)) {
+      Logger.log(
+        '総合点' +
+          key +
+          '番目の作品 → ' +
+          this.pointMap[key] +
+          '点：（' +
+          this.voteMap[key] +
+          '票）'
+      );
     }
+  }
+  static top1(): void {
+    let max: number = 0;
+    let getKey: string = '0';
+    for (let key in this.pointMap) {
+      if (max <= this.pointMap[key]) max = this.pointMap[key];
+      // Logger.log(String(max - 1));
+    }
+    for (let key in this.pointMap) {
+      if (this.pointMap[key] == max) {
+        getKey = key;
+        break;
+      }
+    }
+    Logger.log('１位：' + max + '点で' + getKey + '番の人です');
   }
 }
