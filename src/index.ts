@@ -12,4 +12,5 @@ global.createNewFile = (): void => {
   Calculation.getFormColumn(formColumn);
   Calculation.getFormData(form);
   Calculation.print();
+  Calculation.top1();
 };
