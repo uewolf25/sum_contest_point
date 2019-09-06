@@ -5,8 +5,11 @@ import { Calculation } from './calculation';
 declare var global: any;
 
 global.createNewFile = (): void => {
-  const sheet = SheetService.getSheet(SSURL).getName();
-  const form = FormService.getForm(FURL).getResponses();
+  const properties = PropertiesService.getScriptProperties();
+  const SHEET_URL = properties.getProperty('SS_URL');
+  const FORM_URL = properties.getProperty('GF_URL');
+  const sheet = SheetService.getSheet(SHEET_URL).getName();
+  const form = FormService.getForm(FORM_URL).getResponses();
   let formColumn = form[0].getItemResponses(); //カラムの情報が入っている。->配列
 
   Calculation.getFormColumn(formColumn);
