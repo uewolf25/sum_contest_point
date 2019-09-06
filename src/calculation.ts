@@ -6,7 +6,9 @@ export class Calculation {
   static voteMap: { [key: string]: number } = {};
 
   static initialize(column: string) {
+    // count point of some works .
     this.pointMap[column] = 0;
+    // count vote .
     this.voteMap[column] = 0;
   }
 
@@ -17,7 +19,7 @@ export class Calculation {
       this.initialize(this.replaceLetter(nameColumn));
       if (nameColumn == this.itemNumber) break;
     }
-    //デバッグ用
+    // for debug
     // for (let key in this.pointMap) {
     //   Logger.log(key + '---' + this.pointMap[key]);
     // }
@@ -39,15 +41,15 @@ export class Calculation {
     let workNumber = this.replaceLetter(itemResponse.getResponse());
 
     switch (nameColumn) {
-      case '１位':
+      case '１位' || '1位':
         this.pointCalc(3, workNumber);
         break;
 
-      case '２位':
+      case '２位' || '2位':
         this.pointCalc(2, workNumber);
         break;
 
-      case '３位':
+      case '３位' || '3位':
         this.pointCalc(1, workNumber);
         break;
     }
@@ -75,6 +77,8 @@ export class Calculation {
       );
     }
   }
+
+  // check number 1
   static top1(): void {
     let max: number = 0;
     let getKey: string = '0';
