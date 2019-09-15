@@ -16,17 +16,19 @@ export class Calculation {
   }
 
   static getFormColumn(itemRes: Object): void {
-    // let count = 1;
+    let count = 1;
     for (let item in itemRes) {
       let itemResponse = itemRes[item];
       let nameColumn = FormService.getColumn(itemResponse);
       this.initialize(this.replaceLetter(nameColumn));
-      if (nameColumn == this.itemNumber) break;
+      if (this.itemNumber == String(count)) break;
+      count++;
     }
-    // for debug
+    //for debug
     // for (let key in this.pointMap) {
     //   Logger.log(key + '---' + this.pointMap[key]);
     // }
+    // Logger.log(this.itemNumber + '個');
   }
 
   static getFormData(form: Object): void {
@@ -65,7 +67,8 @@ export class Calculation {
   }
 
   static replaceLetter(letter: string): string {
-    return letter.replace(/番/g, '');
+    let titleNumber = letter.split('.');
+    return titleNumber[0].replace(/番/g, '');
   }
 
   static print(): void {
@@ -73,7 +76,7 @@ export class Calculation {
       Logger.log(
         '総合点' +
           key +
-          '番目の作品 → ' +
+          '番目の作品 → \t' +
           this.pointMap[key] +
           '点：（' +
           this.voteMap[key] +
@@ -96,6 +99,7 @@ export class Calculation {
         break;
       }
     }
+    Logger.log('------------------------------------------------------');
     Logger.log('１位：' + max + '点で' + getKey + '番の人です');
   }
 }
