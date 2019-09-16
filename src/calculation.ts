@@ -4,24 +4,25 @@ export class Calculation {
   static properties = PropertiesService.getScriptProperties();
   static pointMap: { [key: string]: number } = {};
   static voteMap: { [key: string]: number } = {};
-  static itemNumber: string;
+  static nameArray: string[] = [];
+  static itemNumber: number;
 
   static initialize(column: string) {
     // count point of some works .
     this.pointMap[column] = 0;
     // count vote .
     this.voteMap[column] = 0;
-    // number of the work
-    this.itemNumber = this.properties.getProperty('ITEM_NUMBER');
   }
 
   static getFormColumn(itemRes: Object): void {
+    // number of the work
+    this.itemNumber = Number(this.properties.getProperty('ITEM_NUMBER'));
     let count = 1;
     for (let item in itemRes) {
       let itemResponse = itemRes[item];
       let nameColumn = FormService.getColumn(itemResponse);
       this.initialize(this.replaceLetter(nameColumn));
-      if (this.itemNumber == String(count)) break;
+      if (this.itemNumber == count) break;
       count++;
     }
     //for debug
@@ -71,17 +72,31 @@ export class Calculation {
     return titleNumber[0].replace(/番/g, '');
   }
 
+  static pushData(itemRes: Object): void {
+    for (let item in itemRes) {
+      let row = itemRes[item].getItem().getTitle();
+      let rowTitle: string = row.split('.')[1];
+      if (typeof rowTitle === undefined || null) rowTitle = '無名';
+      this.nameArray.push(rowTitle);
+      if (this.itemNumber - 1 <= Number(item)) break;
+    }
+  }
+
   static print(): void {
+    let indexCount = 0;
     for (let key in (this.pointMap, this.voteMap)) {
       Logger.log(
-        '総合点' +
-          key +
-          '番目の作品 → \t' +
+        key +
+          '番目の作品 : 作品名 ->' +
+          this.nameArray[indexCount] +
+          '\t' +
+          ', 総合点 : ' +
           this.pointMap[key] +
           '点：（' +
           this.voteMap[key] +
           '票）'
       );
+      indexCount++;
     }
   }
 
