@@ -10,9 +10,10 @@ global.createNewFile = (): void => {
   const FORM_URL = properties.getProperty('GF_URL');
   const sheet = SheetService.getSheet(SHEET_URL).getName();
   const form = FormService.getForm(FORM_URL).getResponses();
-  let formColumn = form[0].getItemResponses();
+  let formRows = form[0].getItemResponses();
 
-  Calculation.getFormColumn(formColumn);
+  Calculation.getFormColumn(formRows);
+  Calculation.pushData(formRows);
   Calculation.getFormData(form);
   Calculation.print();
   Calculation.top1();
