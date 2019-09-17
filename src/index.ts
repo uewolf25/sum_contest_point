@@ -4,7 +4,7 @@ import { Calculation } from './calculation';
 // main
 declare var global: any;
 
-global.createNewFile = (): void => {
+global.main_sumPoint = (): void => {
   const properties = PropertiesService.getScriptProperties();
   const SHEET_URL = properties.getProperty('SS_URL');
   const FORM_URL = properties.getProperty('GF_URL');
