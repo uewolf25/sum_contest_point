@@ -7,6 +7,7 @@ export class Calculation {
   static nameArray: string[] = [];
   static itemNumber: number;
 
+  /* initialize & set data */
   static initialize(column: string) {
     // count point of some works .
     this.pointMap[column] = 0;
@@ -14,6 +15,7 @@ export class Calculation {
     this.voteMap[column] = 0;
   }
 
+  /*  */
   static getFormColumn(itemRes: Object): void {
     // number of the work
     this.itemNumber = Number(this.properties.getProperty('ITEM_NUMBER'));
@@ -43,6 +45,8 @@ export class Calculation {
       }
     }
   }
+
+  /* judge top3 rows */
   static devideTop3(itemResponse: any): void {
     let nameColumn = FormService.getColumn(itemResponse);
     let workNumber = this.replaceLetter(itemResponse.getResponse());
@@ -62,16 +66,19 @@ export class Calculation {
     }
   }
 
+  /* sum point & vote point */
   static pointCalc(point: number, num: string): void {
     this.pointMap[num] += point;
     this.voteMap[num] += 1;
   }
 
+  /* split letter */
   static replaceLetter(letter: string): string {
     let titleNumber = letter.split('.');
     return titleNumber[0].replace(/番/g, '');
   }
 
+  /* if null, gives name */
   static pushData(itemRes: Object): void {
     for (let item in itemRes) {
       let row = itemRes[item].getItem().getTitle();
@@ -100,7 +107,7 @@ export class Calculation {
     }
   }
 
-  // check number 1
+  /* check number 1 */
   static top1(): void {
     let max: number = 0;
     let getKey: string = '0';
