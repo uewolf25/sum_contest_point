@@ -1,18 +1,18 @@
 import { SheetService } from './sheet.service';
 import { FormService } from './form.service';
 import { Calculation } from './calculation';
+import { Property } from './property';
 // main
 declare var global: any;
 
 global.main_sumPoint = (): void => {
-  const properties = PropertiesService.getScriptProperties();
-  const SHEET_URL = properties.getProperty('SS_URL');
-  const FORM_URL = properties.getProperty('GF_URL');
-  const sheet = SheetService.getSheet(SHEET_URL).getName();
-  const form = FormService.getForm(FORM_URL).getResponses();
+  const prop: Property = new Property();
+
+  const sheet = SheetService.getSheet(prop.sheet).getName();
+  const form = FormService.getForm(prop.form).getResponses();
   let formRows = form[0].getItemResponses();
 
-  Calculation.getFormColumn(formRows);
+  Calculation.getFormColumn(prop, formRows);
   Calculation.pushData(formRows);
   Calculation.getFormData(form);
   Calculation.print();

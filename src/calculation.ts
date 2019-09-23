@@ -1,7 +1,7 @@
 import { FormService } from './form.service';
+import { Property } from './property';
 
 export class Calculation {
-  static properties = PropertiesService.getScriptProperties();
   static pointMap: { [key: string]: number } = {};
   static voteMap: { [key: string]: number } = {};
   static nameArray: string[] = [];
@@ -16,9 +16,9 @@ export class Calculation {
   }
 
   /*  */
-  static getFormColumn(itemRes: Object): void {
+  static getFormColumn(prop: Property, itemRes: Object): void {
     // number of the work
-    this.itemNumber = Number(this.properties.getProperty('ITEM_NUMBER'));
+    this.itemNumber = prop.item;
     let count = 1;
     for (let item in itemRes) {
       let itemResponse = itemRes[item];
