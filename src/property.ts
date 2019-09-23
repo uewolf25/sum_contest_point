@@ -10,7 +10,7 @@ export class Property {
     this._form = this._properteis.getProperty('GF_URL');
     this._sheet = this._properteis.getProperty('SS_URL');
     this._item = this._properteis.getProperty('ITEM_NUMBER');
-    this.alert(this._properteis);
+    this.alert();
   }
 
   get form(): string {
@@ -25,7 +25,7 @@ export class Property {
     return Number(this._item);
   }
 
-  private alert(prop: Prop) {
+  private alert() {
     if (!this._form) {
       throw 'You should set "GF_URL" property from [File] > [Project properties] > [Script properties]';
     }
