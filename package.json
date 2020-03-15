@@ -45,8 +45,10 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex" : "(__tests__/.+(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "testRegex" : ["/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+    "testRegex": [
+      "/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -57,9 +59,10 @@
     ]
   },
   "dependencies": {
+    "@google/clasp": "^2.3.0",
+    "braces": ">=2.3.1",
     "dotenv": "^8.1.0",
-    "set-value": ">=2.0.1",
     "mixin-deep": ">=1.3.2",
-    "braces": ">=2.3.1"
+    "set-value": ">=2.0.1"
   }
 }
