@@ -94,8 +94,8 @@ export class Calculation {
     for (let key in (this.pointMap, this.voteMap)) {
       Logger.log(
         key +
-          '番目の作品 : 作品名 ->' +
-          this.nameArray[indexCount] +
+          '番目の作品 : ' + //作品名 ->' +
+          // this.nameArray[indexCount] +
           '\t' +
           ', 総合点 : ' +
           this.pointMap[key] +
